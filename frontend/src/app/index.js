@@ -5,7 +5,7 @@ angular.module('summer', [
   'restangular', 'ui.router', 'ui.bootstrap',
   'satellizer', 'ngSails'])
   .config(function ($stateProvider, $urlRouterProvider, $sailsProvider) {
-    $sailsProvider.url = 'http://127.0.0.1:1337';
+    $sailsProvider.url = 'http://summer-api.jnw.io';
 
     $stateProvider
       .state('home', {

@@ -7,7 +7,7 @@ var _ = require('lodash');
 module.exports = {
   temperature: function(Model) {
     var _this = this;
-    serialPort = new SerialPort('/dev/cu.usbmodem141211', {
+    serialPort = new SerialPort('/dev/cu.usbmodem1431', {
       baudrate: 9600,
       parser: serialPort.parsers.readline('\n')
     }, false); // this is the openImmediately flag [default is true]

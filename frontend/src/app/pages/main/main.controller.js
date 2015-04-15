@@ -6,13 +6,13 @@ angular.module('summer')
     $scope.currentItem = [];
 
     // Using .then()
-    $sails.get('/temperature').then(function (resp) {
+    $sails.get('/sensor').then(function (resp) {
     }, function (res) {
       console.log(res);
     });
 
     // Watching for updates
-    $sails.on('temperature', function (message) {
+    $sails.on('sensor', function (message) {
       if (message.verb === 'created') {
         $scope.currentItem = message.data;
       }

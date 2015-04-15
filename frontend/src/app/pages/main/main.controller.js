@@ -6,7 +6,8 @@ angular.module('summer')
     $scope.currentItem = [];
 
     // Using .then()
-    $sails.get('/sensor').then(function (resp) {
+    $sails.get('http://summer-api.jnw.io/sensor').then(function (resp) {
+
     }, function (res) {
       console.log(res);
     });

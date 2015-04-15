@@ -1,7 +1,7 @@
 /**
- * TemperatureController
+ * SensorController
  *
- * @description :: Server-side logic for managing temperatures
+ * @description :: Server-side logic for managing sensors
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 

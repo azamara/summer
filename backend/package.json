@@ -29,6 +29,7 @@
     "request": "^2.55.0",
     "sails": "~0.11.0",
     "sails-disk": "~0.10.0",
+    "sails-mongo": "^0.10.6",
     "serialport": "^1.6.3"
   },
   "scripts": {

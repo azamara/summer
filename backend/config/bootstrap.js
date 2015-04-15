@@ -14,7 +14,7 @@ var arduino = require('../api/services/arduino');
 module.exports.bootstrap = function(cb) {
 
   sails.on('lifted', function() {
-    arduino.temperature(Temperature);
+    arduino.sensor(Sensor);
   });
 
   // It's very important to trigger this callback method when you are finished

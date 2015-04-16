@@ -11,11 +11,11 @@ angular.module('summer')
 
         var initData = _.map(_.range(30), function(item) {
           return {
-            "humidity": 1,
-            "temperature": 1,
-            "sound": 1,
-            "vibration": 1,
-            "updatedAt": +moment().add({second: item - 24})
+            "humidity": 0,
+            "temperature": 0,
+            "sound": 0,
+            "vibration": 0,
+            "updatedAt": +moment().add({second: item - 33})
           };
         });
         var getTime = function (time) {
@@ -46,6 +46,9 @@ angular.module('summer')
           },
           exporting: {
             enabled: false
+          },
+          legend: {
+            enabled: true
           },
           scrollbar: {
             enabled: false
@@ -82,9 +85,9 @@ angular.module('summer')
 
           series: [
             {
-              name: 'humidity',
+              name: 'vibration',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.humidity}
+                return {x: item.updatedAt, y: item.vibration}
               })
             },
             {
@@ -94,17 +97,20 @@ angular.module('summer')
               })
             },
             {
-              name: 'temperature',
+              name: 'humidity',
+              color: '#19bdc4',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.temperature}
+                return {x: item.updatedAt, y: item.humidity}
               })
             },
             {
-              name: 'vibration',
+              name: 'temperature',
+              color: '#ff503f',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.vibration}
+                return {x: item.updatedAt, y: item.temperature}
               })
-            }]
+            }
+          ]
         });
       }
     };

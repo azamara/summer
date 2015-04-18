@@ -30,7 +30,8 @@
     "sails": "~0.11.0",
     "sails-disk": "~0.10.0",
     "sails-mongo": "^0.10.6",
-    "serialport": "^1.6.3"
+    "serialport": "^1.6.3",
+    "bluetooth-serial-port": "^1.2.2"
   },
   "scripts": {
     "start": "node app.js",

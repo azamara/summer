@@ -20,6 +20,7 @@ module.exports = {
         serialPort.on('data', function (data) {
           try {
             var item = JSON.parse(data);
+            item = _.merge({location: 1}, item);
             _this.create(Model, item);
           } catch (e) {
             console.log(e);
@@ -33,7 +34,6 @@ module.exports = {
       if (err) {
         console.log('error', err)
       } else {
-        item = _.extend({location: 1}, item);
         Model.publishCreate(_.extend({
           verb: 'created'
         }, item));

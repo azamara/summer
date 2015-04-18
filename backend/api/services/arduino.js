@@ -34,9 +34,9 @@ var Arduino = {
 
     btSerial.on('found', function (address, name) {
       console.log('Bluetooth device: ' + address, name);
-      btSerial.findSerialPortChannel(address, function (channel) {
-        console.log('find bluetooth device: ' + address);
-        if (address === '98-d3-31-60-2d-08') {
+      if (address === '98-d3-31-60-2d-08') {
+        btSerial.findSerialPortChannel(address, function (channel) {
+          console.log('find bluetooth device: ' + address);
           btSerial.connect(address, channel, function () {
             console.log('connected');
 
@@ -49,7 +49,7 @@ var Arduino = {
               buffer = buffer.toString('utf-8') || '';
               result += buffer;
 
-              if(is.include(buffer, '}')) {
+              if (is.include(buffer, '}')) {
                 try {
                   result = _.trim(result);
                   var item = JSON.parse(result);
@@ -67,10 +67,10 @@ var Arduino = {
 
           // close the connection when you're ready
           btSerial.close();
-        }
-      }, function () {
-        console.log('found nothing');
-      });
+        }, function () {
+          console.log('found nothing');
+        });
+      }
     });
 
     btSerial.inquire();

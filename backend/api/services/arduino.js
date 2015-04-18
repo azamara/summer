@@ -33,6 +33,7 @@ module.exports = {
       if (err) {
         console.log('error', err)
       } else {
+        item = _.extend({location: 1}, item);
         Model.publishCreate(_.extend({
           verb: 'created'
         }, item));

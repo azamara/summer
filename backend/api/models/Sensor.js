@@ -11,8 +11,8 @@ module.exports = {
     humidity: 'float',
     temperature: 'float',
     sound: 'float',
-    vibration: 'float'
-
+    vibration: 'float',
+    location: 'int'
   }
 };
 

@@ -52,6 +52,7 @@ var Arduino = {
               if (is.include(buffer, '}')) {
                 try {
                   result = _.trim(result);
+                  console.log(result);
                   var item = JSON.parse(result);
                   _this.create(Model, item);
                 } catch (e) {
@@ -62,12 +63,14 @@ var Arduino = {
               }
             });
           }, function () {
+            btSerial.inquire();
             console.log('cannot connect');
           });
 
           // close the connection when you're ready
           btSerial.close();
         }, function () {
+          btSerial.inquire();
           console.log('found nothing');
         });
       }

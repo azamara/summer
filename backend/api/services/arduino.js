@@ -10,27 +10,26 @@ var Arduino = {
   sensor: function (Model) {
     var _this = this;
 
-    if (config.serialPort === '/dev/cu.usbmodem1431') {
-      serialPort = new SerialPort(config.serialPort, {
-        baudrate: 9600,
-        parser: serialPort.parsers.readline('\n')
-      }, false); // this is the openImmediately flag [default is true]
+    serialPort = new SerialPort(config.serialPort, {
+      baudrate: 9600,
+      parser: serialPort.parsers.readline('\n')
+    }, false); // this is the openImmediately flag [default is true]
 
-      serialPort.open(function (error) {
-        if (error) {
-          console.log('failed to open: ' + error);
-        } else {
-          serialPort.on('data', function (data) {
-            try {
-              var item = JSON.parse(data);
-              _this.create(Model, item);
-            } catch (e) {
-              console.log(e);
-            }
-          });
-        }
-      });
-    }
+    serialPort.open(function (error) {
+      if (error) {
+        console.log('failed to open: ' + error);
+      } else {
+        serialPort.on('data', function (data) {
+          try {
+            var item = JSON.parse(data);
+            console.log('Location ' + item.location + ': ' + data);
+            _this.create(Model, item);
+          } catch (e) {
+            console.log(e);
+          }
+        });
+      }
+    });
 
     btSerial.on('found', function (address, name) {
       console.log('Bluetooth device: ' + address, name);
@@ -52,8 +51,8 @@ var Arduino = {
               if (is.include(buffer, '}')) {
                 try {
                   result = _.trim(result);
-                  console.log(result);
                   var item = JSON.parse(result);
+                  console.log('Location ' + item.location + ': ' + result);
                   _this.create(Model, item);
                 } catch (e) {
                   console.log(e);

@@ -2,22 +2,18 @@ angular.module('summer')
   .directive('mwChart', function ($interval) {
     return {
       restrict: 'EA',
-      link: function (scope, element) {
+      scope: {
+        data: '='
+      },
+      link: function (scope, element, attrs) {
+        var options = scope.$eval(attrs.options);
         Highcharts.setOptions({
           global: {
             useUTC: false
           }
         });
 
-        var initData = _.map(_.range(30), function(item) {
-          return {
-            "humidity": 0,
-            "temperature": 0,
-            "sound": 0,
-            "vibration": 0,
-            "updatedAt": +moment().add({second: item - 33})
-          };
-        });
+        var initData = scope.data;
         var getTime = function (time) {
           time = moment(time).format('YYYY.MM.DD HH:mm:ss');
           return +moment(time, 'YYYY-MM-DD HH:mm:ss');
@@ -29,12 +25,14 @@ angular.module('summer')
               load: function () {
                 var series = this.series;
                 $interval(function () {
-                  var item = scope.currentItem;
+                  var item = scope.$parent.currentItem;
                   _.forEach(series, function (_item) {
-                    if (is.propertyDefined(item, 'updatedAt')) {
-                      _item.addPoint([getTime(+moment(item.updatedAt)), item[_item.name]], true, true);
-                    } else {
-                      _item.addPoint([+moment(), null], true, true);
+                    if (item && (options.location === +item.location)) {
+                      if (is.propertyDefined(item, 'updatedAt')) {
+                        _item.addPoint([getTime(+moment(item.updatedAt)), item[_item.name]], true, true);
+                      } else {
+                        _item.addPoint([+moment(), null], true, true);
+                      }
                     }
                   });
                 }, 1000);
@@ -62,7 +60,7 @@ angular.module('summer')
           xAxis: {
             type: 'datetime',
             dateTimeLabelFormats: {
-              second: '%H:%M',
+              second: '%H:%M:%S',
               minute: '%H:%M',
               hour: '%H:%M',
               day: '%Y-%m-%e',
@@ -92,20 +90,21 @@ angular.module('summer')
             },
             {
               name: 'sound',
+              color: '#a88cd5',
               data: _.map(initData, function (item) {
                 return {x: item.updatedAt, y: item.sound}
               })
             },
             {
               name: 'humidity',
-              color: '#19bdc4',
+              color: '#02baf2',
               data: _.map(initData, function (item) {
                 return {x: item.updatedAt, y: item.humidity}
               })
             },
             {
               name: 'temperature',
-              color: '#ff503f',
+              color: '#f84545',
               data: _.map(initData, function (item) {
                 return {x: item.updatedAt, y: item.temperature}
               })

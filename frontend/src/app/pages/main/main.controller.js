@@ -2,12 +2,50 @@
 
 angular.module('summer')
   .controller('MainCtrl', function ($scope, $log, $sails) {
-    //$scope.collection = [];
     $scope.currentItem = [];
-
+    var defaultsSensor = {
+      temperature: {
+        type: 'danger',
+        value: 10
+      },
+      humidity: {
+        type: 'default',
+        value: 10
+      },
+      sound: {
+        type: 'info',
+        value: 10
+      }
+    };
+    $scope.locations = [
+      {
+        _id: 1,
+        name: 'Living Room',
+        initData: [],
+        sensors: angular.copy(defaultsSensor)
+      },
+      {
+        _id: 2,
+        name: 'Master Room',
+        initData: [],
+        sensors: angular.copy(defaultsSensor)
+      }
+    ];
     // Using .then()
-    $sails.get('http://summer-api.jnw.io/sensor').then(function (resp) {
-
+    $sails.get('http://summer-api.jnw.io/sensor?sort=updatedAt+desc').then(function (res) {
+      _.forEach($scope.locations, function(location) {
+        location.initData = _.sortBy(_.compact(_.map(res.body, function(item) {
+          if(+item.location === location._id) {
+            return {
+              humidity: item.humidity,
+              sound: item.sound,
+              temperature: item.temperature,
+              updatedAt: +moment(item.updatedAt),
+              vibration: item.vibration
+            };
+          }
+        })), 'updatedAt');
+      });
     }, function (res) {
       console.log(res);
     });
@@ -16,6 +54,12 @@ angular.module('summer')
     $sails.on('sensor', function (message) {
       if (message.verb === 'created') {
         $scope.currentItem = message.data;
+
+        var targetLocation = _.find($scope.locations, {_id: +$scope.currentItem.location});
+        _.forEach(defaultsSensor, function(value, key) {
+          targetLocation.sensors[key].value = $scope.currentItem[key];
+        });
       }
     });
   });
+

@@ -1,2 +1,36 @@
+<div class="page-header text-center">
+  <h1>My Home Sensor
+    <small>Subtext for header</small>
+  </h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6" ng-repeat="location in locations track by $index">
+              <h2>{{::location.name}}</h2>
 
-<mw-chart style="width: 100%; min-height: 400px;"></mw-chart>
+              <div ng-repeat="(key, value) in location.sensors track by $index">
+                <h3 class="text-capitalize">{{::key}}</h3>
+                <br/>
+                <progressbar class="progress-striped active" value="value.value" type="{{value.type}}">
+                  {{value.value}} %
+                </progressbar>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6" ng-repeat="location in locations track by $index">
+      <mw-chart ng-if="location.initData.length" data="location.initData" options="{
+        'location': {{location._id}}
+      }" style="display: block;"></mw-chart>
+    </div>
+  </div>
+</div>

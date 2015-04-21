@@ -30,8 +30,6 @@ angular.module('summer')
                     if (item && (options.location === +item.location)) {
                       if (is.propertyDefined(item, 'updatedAt')) {
                         _item.addPoint([getTime(+moment(item.updatedAt)), item[_item.name]], true, true);
-                      } else {
-                        _item.addPoint([+moment(), null], true, true);
                       }
                     }
                   });

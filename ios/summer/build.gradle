@@ -1,0 +1,18 @@
+buildscript {
+  repositories {
+    maven {
+      url 'http://openbakery.org/repository/'
+      url 'https://jitpack.io'
+    }
+    mavenCentral()
+  }
+  dependencies {
+    classpath group: 'org.openbakery', name: 'xcodePlugin', version: '0.9.+'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.0.9'
+  }
+}
+apply plugin: 'xcode'
+
+xcodebuild {
+  target = 'summer'
+}

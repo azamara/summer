@@ -1,5 +1,7 @@
+'use strict';
+
 angular.module('summer')
-  .directive('mwChart', function ($interval) {
+  .directive('mwChart', function () {
     return {
       restrict: 'EA',
       scope: {
@@ -20,15 +22,9 @@ angular.module('summer')
           return +moment(time, 'YYYY-MM-DD HH:mm:ss');
         };
         var series;
-        var chart = element.highcharts('StockChart', {
+        element.highcharts('StockChart', {
           chart: {
-            type: 'areaspline',
-            events: {
-              load: function () {
-                series = this.series;
-                //$interval(function () {}, 1000);
-              }
-            }
+            type: 'areaspline'
           },
           title: {
             text: 'Sensor'
@@ -76,28 +72,28 @@ angular.module('summer')
             {
               name: 'vibration',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.vibration}
+                return {x: item.updatedAt, y: item.vibration};
               })
             },
             {
               name: 'sound',
               color: '#a88cd5',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.sound}
+                return {x: item.updatedAt, y: item.sound};
               })
             },
             {
               name: 'humidity',
               color: '#02baf2',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.humidity}
+                return {x: item.updatedAt, y: item.humidity};
               })
             },
             {
               name: 'temperature',
               color: '#f84545',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.temperature}
+                return {x: item.updatedAt, y: item.temperature};
               })
             }
           ]

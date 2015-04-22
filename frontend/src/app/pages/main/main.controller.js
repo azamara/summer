@@ -31,7 +31,7 @@ angular.module('summer')
         sensors: angular.copy(defaultsSensor)
       }
     ];
-    // Using .then()
+
     $scope.init = function() {
       $sails.get('http://summer-api.jnw.io/sensor?sort=updatedAt+desc').then(function (res) {
         _.forEach($scope.locations, function(location) {
@@ -46,6 +46,10 @@ angular.module('summer')
               };
             }
           })), 'updatedAt');
+
+          _.forEach(defaultsSensor, function(value, key) {
+            location.sensors[key].value = location.initData[0][key];
+          });
         });
       }, function (res) {
         console.log(res);

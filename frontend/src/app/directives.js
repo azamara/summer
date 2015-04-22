@@ -27,7 +27,7 @@ angular.module('summer')
             type: 'areaspline'
           },
           title: {
-            text: 'Sensor'
+            text: options.locationName + ' Sensor'
           },
           exporting: {
             enabled: false

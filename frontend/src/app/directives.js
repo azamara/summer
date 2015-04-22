@@ -24,7 +24,12 @@ angular.module('summer')
         var series;
         element.highcharts('StockChart', {
           chart: {
-            type: 'areaspline'
+            type: 'areaspline',
+            events: {
+              load: function () {
+                series = this.series;
+              }
+            }
           },
           title: {
             text: options.locationName + ' Sensor'

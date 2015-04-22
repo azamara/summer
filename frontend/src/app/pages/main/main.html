@@ -28,7 +28,7 @@
 
   <div class="row">
     <div class="col-md-6" ng-repeat="location in locations track by $index">
-      <mw-chart ng-if="location.initData.length" data="location.initData" options="{
+      <mw-chart ng-if="location.initData.length" current-item="currentItem" data="location.initData" options="{
         'location': {{location._id}}
       }" style="display: block;"></mw-chart>
     </div>

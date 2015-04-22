@@ -3,7 +3,8 @@ angular.module('summer')
     return {
       restrict: 'EA',
       scope: {
-        data: '='
+        data: '=',
+        currentItem: '='
       },
       link: function (scope, element, attrs) {
         var options = scope.$eval(attrs.options);
@@ -18,22 +19,14 @@ angular.module('summer')
           time = moment(time).format('YYYY.MM.DD HH:mm:ss');
           return +moment(time, 'YYYY-MM-DD HH:mm:ss');
         };
-        element.highcharts('StockChart', {
+        var series;
+        var chart = element.highcharts('StockChart', {
           chart: {
             type: 'areaspline',
             events: {
               load: function () {
-                var series = this.series;
-                $interval(function () {
-                  var item = scope.$parent.currentItem;
-                  _.forEach(series, function (_item) {
-                    if (item && (options.location === +item.location)) {
-                      if (is.propertyDefined(item, 'updatedAt')) {
-                        _item.addPoint([getTime(+moment(item.updatedAt)), item[_item.name]], true, true);
-                      }
-                    }
-                  });
-                }, 1000);
+                series = this.series;
+                //$interval(function () {}, 1000);
               }
             }
           },
@@ -108,6 +101,19 @@ angular.module('summer')
               })
             }
           ]
+        });
+
+        scope.$watch('currentItem', function (value) {
+          var item = value;
+          if(item && series) {
+            _.forEach(series, function (_item) {
+              if (item && (options.location === +item.location)) {
+                if (is.propertyDefined(item, 'updatedAt')) {
+                  _item.addPoint([getTime(+moment(item.updatedAt)), item[_item.name]], true, true);
+                }
+              }
+            });
+          }
         });
       }
     };

@@ -32,23 +32,26 @@ angular.module('summer')
       }
     ];
     // Using .then()
-    $sails.get('http://summer-api.jnw.io/sensor?sort=updatedAt+desc').then(function (res) {
-      _.forEach($scope.locations, function(location) {
-        location.initData = _.sortBy(_.compact(_.map(res.body, function(item) {
-          if(+item.location === location._id) {
-            return {
-              humidity: item.humidity,
-              sound: item.sound,
-              temperature: item.temperature,
-              updatedAt: +moment(item.updatedAt),
-              vibration: item.vibration
-            };
-          }
-        })), 'updatedAt');
+    $scope.init = function() {
+      $sails.get('http://summer-api.jnw.io/sensor?sort=updatedAt+desc').then(function (res) {
+        _.forEach($scope.locations, function(location) {
+          location.initData = _.sortBy(_.compact(_.map(res.body, function(item) {
+            if(+item.location === location._id) {
+              return {
+                humidity: item.humidity,
+                sound: item.sound,
+                temperature: item.temperature,
+                updatedAt: +moment(item.updatedAt),
+                vibration: item.vibration
+              };
+            }
+          })), 'updatedAt');
+        });
+      }, function (res) {
+        console.log(res);
       });
-    }, function (res) {
-      console.log(res);
-    });
+    };
+    $scope.init();
 
     // Watching for updates
     $sails.on('sensor', function (message) {
@@ -60,6 +63,10 @@ angular.module('summer')
           targetLocation.sensors[key].value = $scope.currentItem[key];
         });
       }
+    });
+
+    $sails.on('reconnect', function() {
+      $scope.init();
     });
   });
 

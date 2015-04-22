@@ -40,9 +40,11 @@ var Arduino = {
       if (err) {
         console.log('error', err)
       } else {
-        Model.publishCreate(_.extend({
-          verb: 'created'
-        }, item));
+        _.delay(function() {
+          Model.publishCreate(_.extend({
+            verb: 'created'
+          }, item));
+        }, 16);
       }
     });
   }

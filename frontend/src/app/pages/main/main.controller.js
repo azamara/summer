@@ -3,7 +3,7 @@
 angular.module('summer')
   .controller('MainCtrl', function ($scope, $log, $sails) {
     $scope.currentItem = [];
-    var defaultsSensor = {
+    $scope.defaultsSensor = {
       dust: {
         type: 'warning',
         value: 10,
@@ -27,7 +27,7 @@ angular.module('summer')
         _id: 2,
         name: 'Master Room',
         initData: [],
-        sensors: angular.copy(defaultsSensor)
+        sensors: angular.copy($scope.defaultsSensor)
       }
     ];
 
@@ -47,7 +47,7 @@ angular.module('summer')
             }
           })), 'updatedAt');
 
-          _.forEach(defaultsSensor, function(value, key) {
+          _.forEach($scope.defaultsSensor, function(value, key) {
             location.sensors[key].value = location.initData[0][key];
           });
         });
@@ -63,7 +63,7 @@ angular.module('summer')
         $scope.currentItem = message.data;
 
         var targetLocation = _.find($scope.locations, {_id: +$scope.currentItem.location});
-        _.forEach(defaultsSensor, function(value, key) {
+        _.forEach($scope.defaultsSensor, function(value, key) {
           targetLocation.sensors[key].value = $scope.currentItem[key];
         });
       }

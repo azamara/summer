@@ -1,4 +1,4 @@
-# Summer ![](https://travis-ci.org/azamara/summer.svg)
+# Summer [![](https://travis-ci.org/azamara/summer.svg)](https://travis-ci.org/azamara/summer)
 
 > Home Environment Monitoring
 

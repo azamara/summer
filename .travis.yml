@@ -14,3 +14,8 @@ script:
   - 'cd frontend'
   - 'gulp test'
   - 'cd ../'
+
+cache:
+  directories:
+  - frontend/node_modules
+  - frontend/bower_components

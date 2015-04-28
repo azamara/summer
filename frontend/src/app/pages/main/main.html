@@ -3,9 +3,9 @@
     <small>by William</small>
   </h1>
 </div>
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <div class="col-sm-6" ng-repeat="location in locations track by $index">
+    <div class="col-sm-{{12 / location.initData.length}}" ng-repeat="location in locations track by $index">
       <div class="panel panel-default">
         <div class="panel-body">
           <h2>{{::location.name}}</h2>
@@ -19,7 +19,7 @@
           </div>
           <hr/>
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-{{12 / location.initData.length}}">
               <mw-chart ng-if="location.initData.length" current-item="currentItem" data="location.initData" options="{
                       location: {{location._id}},
                       locationName: '{{location.name}}'

@@ -12,6 +12,7 @@ module.exports = {
     temperature: 'float',
     sound: 'float',
     vibration: 'float',
+    dust: 'float',
     location: 'int'
   }
 };

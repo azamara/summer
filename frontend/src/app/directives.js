@@ -52,6 +52,7 @@ angular.module('summer')
           xAxis: {
             type: 'datetime',
             dateTimeLabelFormats: {
+              millisecond: '%H:%M:%S',
               second: '%H:%M:%S',
               minute: '%H:%M',
               hour: '%H:%M',
@@ -75,9 +76,10 @@ angular.module('summer')
 
           series: [
             {
-              name: 'vibration',
+              name: 'dust',
+              color: '#434348',
               data: _.map(initData, function (item) {
-                return {x: item.updatedAt, y: item.vibration};
+                return {x: item.updatedAt, y: item.dust};
               })
             },
             {
@@ -96,9 +98,15 @@ angular.module('summer')
             },
             {
               name: 'temperature',
-              color: '#f84545',
+              color: '#ff4545',
               data: _.map(initData, function (item) {
                 return {x: item.updatedAt, y: item.temperature};
+              })
+            },
+            {
+              name: 'vibration',
+              data: _.map(initData, function (item) {
+                return {x: item.updatedAt, y: item.vibration};
               })
             }
           ]

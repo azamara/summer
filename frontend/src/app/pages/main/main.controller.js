@@ -19,12 +19,6 @@ angular.module('summer')
     };
     $scope.locations = [
       {
-        _id: 1,
-        name: 'Living Room',
-        initData: [],
-        sensors: angular.copy(defaultsSensor)
-      },
-      {
         _id: 2,
         name: 'Master Room',
         initData: [],
@@ -41,6 +35,7 @@ angular.module('summer')
                 humidity: item.humidity,
                 sound: item.sound,
                 temperature: item.temperature,
+                dust: item.dust,
                 updatedAt: +moment(item.updatedAt),
                 vibration: item.vibration
               };

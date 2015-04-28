@@ -14,7 +14,7 @@
             <h3 class="text-capitalize">{{::key}}</h3>
             <br/>
             <progressbar class="progress-striped active" value="value.value" type="{{value.type}}">
-              {{value.value}}%
+              {{value.value}}{{value.unit || '%'}}
             </progressbar>
           </div>
           <hr/>

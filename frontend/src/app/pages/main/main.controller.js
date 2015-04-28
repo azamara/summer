@@ -6,7 +6,8 @@ angular.module('summer')
     var defaultsSensor = {
       dust: {
         type: 'warning',
-        value: 10
+        value: 10,
+        unit: '㎍/㎥'
       },
       temperature: {
         type: 'danger',

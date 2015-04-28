@@ -6,20 +6,21 @@ angular.module('summer')
     $scope.defaultsSensor = {
       dust: {
         type: 'warning',
-        value: 10,
+        value: 30,
         unit: '㎍/㎥'
       },
       temperature: {
         type: 'danger',
-        value: 10
+        value: 25
       },
       humidity: {
         type: 'default',
-        value: 10
+        value: 50
       },
       sound: {
         type: 'info',
-        value: 10
+        value: 10,
+        unit: '㏈'
       }
     };
     $scope.locations = [

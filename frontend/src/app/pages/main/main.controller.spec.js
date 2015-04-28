@@ -16,8 +16,6 @@ describe('controllers', function(){
       $scope: scope
     });
 
-    console.log(scope);
-
     expect(angular.isObject(scope.defaultsSensor)).toBeTruthy();
   }));
 });

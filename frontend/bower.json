@@ -14,7 +14,7 @@
     "angular": "~1.3.4",
     "satellizer": "~0.9.4",
     "angular-sails": "~1.1.2",
-    "lodash": "~3.6.0",
+    "lodash": "~3.7.0",
     "moment": "~2.10.2",
     "is_js": "~0.7.3",
     "highstock-release": "~2.1.5"
@@ -25,5 +25,9 @@
   "resolutions": {
     "jquery": "~2.1.1",
     "angular": "~1.3.4"
+  },
+  "resolutions": {
+    "angular": "~1.3.4",
+    "lodash": "~3.7.0"
   }
 }

@@ -24,6 +24,9 @@ angular.module('summer')
         var series;
         element.highcharts('StockChart', {
           chart: {
+            zoomType: null,
+            pinchType: 'none',
+            backgroundColor: null,
             type: 'areaspline',
             events: {
               load: function () {

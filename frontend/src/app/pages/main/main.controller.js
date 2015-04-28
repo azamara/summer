@@ -4,6 +4,10 @@ angular.module('summer')
   .controller('MainCtrl', function ($scope, $log, $sails) {
     $scope.currentItem = [];
     var defaultsSensor = {
+      dust: {
+        type: 'warning',
+        value: 10
+      },
       temperature: {
         type: 'danger',
         value: 10

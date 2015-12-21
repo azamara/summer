@@ -6,6 +6,7 @@
   "keywords": [],
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bluetooth-serial-port": "^1.2.2",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",
     "grunt-contrib-clean": "~0.5.0",
@@ -27,11 +28,10 @@
     "querystring": "^0.2.0",
     "rc": "~0.5.0",
     "request": "^2.55.0",
-    "sails": "~0.11.0",
+    "sails": "~0.11.2",
     "sails-disk": "~0.10.0",
-    "sails-mongo": "^0.10.6",
-    "serialport": "^1.6.3",
-    "bluetooth-serial-port": "^1.2.2"
+    "sails-mongo": "^0.11.4",
+    "serialport": "git://github.com/ghostoy/node-serialport.git#nan1to2"
   },
   "scripts": {
     "start": "node app.js",
